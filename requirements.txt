@@ -8,6 +8,5 @@ huggingface_hub
 fastapi
 uvicorn
 pydantic
-re
-json
-pandas
+torch
+lxml
