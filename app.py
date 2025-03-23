@@ -1,4 +1,4 @@
-# Importing libraries
+# Importing necessary libraries
 import streamlit as st
 from utils import *
 
@@ -11,9 +11,9 @@ company_name = st.text_input("## Enter the name of the company: ")
 # Button to generate news
 if st.button("Search"):
     if company_name:
-        # Scrape news articles
+        # Scrape news articles related to the company
         articles = scrape_news(company_name)
-        
+
         # Perform sentiment analysis on each article
         for article in articles:
             article['sentiment'] = analyze_sentiment(article['summary'])
@@ -24,10 +24,11 @@ if st.button("Search"):
         for article in articles:
             st.write(f"**Title:** {article['title']}")
             st.write(f"**Summary:** {article['summary']}")
+            st.write(f"**Topics:** {article['topics']}")
             st.write(f"**Sentiment:** {article['sentiment']}")
             st.write("-----------------")
 
-        # Comparative Analysis
+        # Comparative Analysis of Sentiments
         sentiment_distribution = compare_sentiments(articles)
         st.write(f"## Comparative Sentiment Score")
         st.write(f"### Sentiment Distribution")
@@ -35,19 +36,28 @@ if st.button("Search"):
         st.write(f"Negative: {sentiment_distribution['NEGATIVE']}")
         st.write(f"Neutral: {sentiment_distribution['NEUTRAL']}")
 
+        # Coverage Differences
+        comparison = extract_impact_and_comparisons(comparisons_and_impact(articles))
+        st.write(f'### Coverage Differences')
+        for item in comparison:
+            st.write(f'{item}')
 
-        # THE FOLLOWING ARE YET TO BE DONE
-        st.write(f"### Coverage Differences")
+        # Topic Overlap
         st.write(f"### Topic Overlap")
+        st.write(f"Common Topics: {extract_common_topics(articles)}")
+        unique_topics = extract_unique_topics(articles)
+        for i, topics in enumerate(unique_topics):
+            st.write(f"Unique Topics in Article {i + 1}: {topics}")
         st.write("-----------------")
 
-        # Sentiment Analysis Summary
+        # Final Sentiment Analysis Summary
         st.write(f"## Final Sentiment Analysis")
+        final_text = get_detailed_sentiment_summary(articles)
+        st.write(f'{final_text}')
 
-        # text to speech audio
+        # Text-to-Speech Audio
         st.write(f"## Audio")
-        summary_text = f"{company_name} के बारे में {len(articles)} खबरें मिलीं। इनमें से {sentiment_distribution['POSITIVE']} खबरें सकारात्मक, {sentiment_distribution['NEGATIVE']} खबरें नकारात्मक, और {sentiment_distribution['NEUTRAL']} खबरें तटस्थ हैं।"
-        generate_hindi_tts(summary_text)
+        generate_hindi_tts(translate_en_to_hi(final_text))
         st.audio("output.mp3", format="audio/mp3")
     else:
         st.write("Please enter a company name.")

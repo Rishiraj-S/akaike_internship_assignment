@@ -1,10 +1,13 @@
 streamlit
 requests
 beautifulsoup4
-nltk
 transformers
 gtts
-pandas
-numpy
+python-dotenv
 huggingface_hub
+fastapi
+uvicorn
+pydantic
 re
+json
+pandas
