@@ -25,4 +25,14 @@ This project is a web-based application that extracts key details from multiple 
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
    cd your-repo-name
-2. Install the required dependencies
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+3. Set up environment variables:
+   - Create a .env file in the root directory
+   - Add the follwing API keys (replace with your actual keys):
+     ```CLASSIFICATION_API_KEY=your_classification_api_key
+SUMMARIZATION_API_KEY=your_summarization_api_key
+FINAL_SUM_KEY=your_final_sum_key
+TRANSLATION_KEY=your_translation_key```
+
