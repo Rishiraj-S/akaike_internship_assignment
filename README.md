@@ -1,3 +1,14 @@
+title: Akaike Internship Assignment
+emoji: 🐢
+colorFrom: pink
+colorTo: purple
+sdk: streamlit
+sdk_version: 1.43.2
+app_file: app.py
+pinned: false
+license: mit
+short_description: akaike internship assignment
+
 # News Summarization and Text-to-Speech Application
 
 ## Overview
